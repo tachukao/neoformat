@@ -253,6 +253,8 @@ function! s:generate_cmd(definition, filetype) abort
         let path = !using_stdin ? tempname() : ''
     endif
 
+    let path = get(a:definition, 'tmp_file_path', path)
+
     let inline_environment = get(a:definition, 'env', [])
     let _fullcmd = join(inline_environment, ' ') . ' ' . executable . ' ' . join(args_expanded) . ' ' . (no_append ? '' : path)
     " make sure there aren't any double spaces in the cmd
